@@ -20,31 +20,36 @@
 
   <worldbody>
     <light name="key" pos="2 -3 5" dir="-0.2 0.3 -1" diffuse="0.9 0.9 0.9"/>
-    <geom name="floor" type="plane" size="10 10 0.1" material="floor_material" friction="1.2 0.1 0.01"/>
+    <geom name="floor" type="box" pos="0 0 -0.03" size="4.0 4.0 0.03" material="floor_material" friction="2.2 0.35 0.08"/>
     <geom name="front_wall" type="box" pos="-4.0 0 0.25" size="0.06 4.0 0.25" rgba="0.45 0.48 0.52 1"/>
     <geom name="rear_wall" type="box" pos="4.0 0 0.25" size="0.06 4.0 0.25" rgba="0.45 0.48 0.52 1"/>
     <geom name="left_wall" type="box" pos="0 4.0 0.25" size="4.0 0.06 0.25" rgba="0.45 0.48 0.52 1"/>
     <geom name="right_wall" type="box" pos="0 -4.0 0.25" size="4.0 0.06 0.25" rgba="0.45 0.48 0.52 1"/>
 
-    <body name="robot" pos="0 0 0.44">
+    <body name="robot" pos="0 0 0.36">
       <freejoint name="robot_free"/>
       <geom name="chassis" type="box" size="0.62 0.42 0.16" rgba="0.08 0.25 0.62 1" mass="8"/>
       <geom name="top_plate" type="box" pos="0 0 0.2" size="0.48 0.32 0.04" rgba="0.12 0.42 0.85 1" mass="1"/>
+      <body name="front_camera_mount" pos="-0.66 0 -0.08">
+        <geom name="front_camera_body" type="box" size="0.055 0.09 0.04" rgba="0.02 0.02 0.025 1" mass="0.08" contype="0" conaffinity="0"/>
+        <geom name="front_camera_lens" type="cylinder" pos="-0.055 0 0" quat="0.7071 0 0.7071 0" size="0.025 0.012" rgba="0.05 0.08 0.12 1" mass="0.01" contype="0" conaffinity="0"/>
+        <camera name="front_camera" pos="-0.075 0 0" xyaxes="0 1 0 0 0 1" fovy="75"/>
+      </body>
 
       <body name="front_left_wheel" pos="-0.43 0.46 -0.2" quat="0.7071 0.7071 0 0">
         <joint name="front_left_wheel_joint" type="hinge" axis="0 0 1"/>
-        <geom name="front_left_wheel_geom" type="cylinder" size="0.18 0.09" rgba="0.04 0.04 0.05 1" mass="0.5" friction="0.45 0.01 0.01"/>
+        <geom name="front_left_wheel_geom" type="cylinder" size="0.14 0.08" rgba="0.04 0.04 0.05 1" mass="0.4" friction="0.45 0.01 0.01"/>
       </body>
       <body name="front_right_wheel" pos="-0.43 -0.46 -0.2" quat="0.7071 0.7071 0 0">
         <joint name="front_right_wheel_joint" type="hinge" axis="0 0 1"/>
-        <geom name="front_right_wheel_geom" type="cylinder" size="0.18 0.09" rgba="0.04 0.04 0.05 1" mass="0.5" friction="0.45 0.01 0.01"/>
+        <geom name="front_right_wheel_geom" type="cylinder" size="0.14 0.08" rgba="0.04 0.04 0.05 1" mass="0.4" friction="0.45 0.01 0.01"/>
       </body>
       <body name="rear_caster" pos="0.48 0 -0.20">
         <joint name="caster_swivel" type="hinge" axis="0 0 1" damping="0.02"/>
         <geom name="caster_fork" type="box" pos="0 0 0.08" size="0.045 0.045 0.08" rgba="0.25 0.28 0.32 1" mass="0.03" contype="0" conaffinity="0"/>
         <body name="caster_wheel" pos="0 0 -0.08" quat="0.7071 0.7071 0 0">
           <joint name="caster_roll" type="hinge" axis="0 0 1" damping="0.01"/>
-          <geom name="caster_wheel_geom" type="cylinder" size="0.09 0.04" rgba="0.06 0.06 0.07 1" mass="0.12" friction="0.04 0.001 0.001"/>
+          <geom name="caster_wheel_geom" type="cylinder" size="0.07 0.035" rgba="0.06 0.06 0.07 1" mass="0.1" friction="0.04 0.001 0.001"/>
         </body>
       </body>
 
@@ -59,12 +64,11 @@
             <body name="forearm" pos="0 0 0.22">
               <geom name="forearm_link" type="capsule" fromto="0 0 -0.22 0 0 0.22" size="0.075" rgba="0.96 0.72 0.20 1" mass="0.25"/>
               <body name="gripper_tip" pos="0 0 0.45">
-                <geom name="gripper_palm" type="box" size="0.12 0.12 0.055" rgba="0.95 0.25 0.12 1" mass="0.25"/>
-                <body name="left_finger" pos="0 0.11 0">
+                <body name="left_finger" pos="0 0.1425 0">
                   <joint name="gripper_joint" type="slide" axis="0 1 0" range="0 0.10"/>
                   <geom name="left_finger_geom" type="box" pos="0 0.045 -0.08" size="0.035 0.045 0.12" rgba="0.95 0.25 0.12 1" mass="0.12"/>
                 </body>
-                <body name="right_finger" pos="0 -0.11 0">
+                <body name="right_finger" pos="0 -0.1425 0">
                   <geom name="right_finger_geom" type="box" pos="0 -0.045 -0.08" size="0.035 0.045 0.12" rgba="0.95 0.25 0.12 1" mass="0.12"/>
                 </body>
               </body>
@@ -74,11 +78,29 @@
       </body>
     </body>
 
-    <body name="tennis_ball" pos="-0.90 0 0.12">
+    <body name="tennis_ball" pos="-0.90 0 0.15">
       <freejoint name="ball_free"/>
-      <geom name="ball_geom" type="sphere" size="0.12" rgba="0.76 0.96 0.08 1" mass="0.06" friction="0.9 0.03 0.01"/>
+      <geom name="ball_geom" type="sphere" size="0.15" rgba="0.76 0.96 0.08 1" mass="0.04" friction="1.8 0.25 0.06"/>
     </body>
   </worldbody>
+
+  <contact>
+    <!-- Ball-on-floor friction, isolated from every other contact in the scene.
+         Without this pair the two geom frictions are combined with an
+         element-wise max, so the floor's 2.2 always wins over the ball's 1.8.
+         mjModel.pair_friction uses the raw contact layout (tangent1, tangent2,
+         spin, roll1, roll2) and is copied into the contact verbatim - it is NOT
+         the (slide, spin, roll) layout of geom friction, hence the repeated
+         value. Only the two tangent slots apply at condim="3"; raising it to 6
+         adds rolling resistance (a ball that rolls on forever otherwise) but
+         also pushes the ball out of the gripper's reach on pick_ball.
+         solref/solimp must be repeated here: a pair does not inherit the
+         <default><geom> contact parameters and would otherwise fall back to the
+         global 0.02 1 / 0.9 0.95 0.001, which is too soft to pick the ball up.
+         main.py overrides the sliding value at startup from BALL_FLOOR_FRICTION. -->
+    <pair name="ball_floor" geom1="floor" geom2="ball_geom" condim="3" friction="2.2 2.2"
+          solref="0.01 1" solimp="0.9 0.95 0.01"/>
+  </contact>
 
   <actuator>
     <velocity name="front_left_drive" joint="front_left_wheel_joint" kv="2.5" ctrlrange="-8 8"/>

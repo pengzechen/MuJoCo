@@ -1,9 +1,10 @@
 {
   "pick_ball": [
-    {"shoulder": -1.25, "elbow": -1.35, "gripper": 0.08, "duration": 1.0},
-    {"shoulder": -1.40, "elbow": -2.21, "gripper": 0.08, "duration": 0.8},
-    {"shoulder": -1.40, "elbow": -2.21, "gripper": 0.015, "duration": 0.7},
-    {"shoulder": -1.25, "elbow": -1.70, "gripper": 0.015, "duration": 1.0}
+    {"shoulder": -1.10, "elbow": -1.25, "gripper": 0.10, "duration": 0.8},
+    {"shoulder": -1.35, "elbow": -1.53, "gripper": 0.10, "duration": 0.8},
+    {"shoulder": -1.35, "elbow": -1.53, "gripper": 0.035, "duration": 0.35},
+    {"shoulder": -1.35, "elbow": -1.53, "gripper": 0.015, "duration": 0.45},
+    {"shoulder": -1.05, "elbow": -1.25, "gripper": 0.015, "duration": 1.0}
   ],
   "home": [
     {"shoulder": 0.0, "elbow": -1.0, "gripper": 0.08, "duration": 1.0}
